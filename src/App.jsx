@@ -1,6 +1,7 @@
 import react from 'react';
-import DropFile from './components/drop/DropFile';
+import DropFile from './components/drop/DropFile.jsx';
 import './App.css';
+import GridImages from './components/grid/GridImages.jsx';
 
 function App() {
   const onFileChange = (files) => {
@@ -8,6 +9,7 @@ function App() {
   }
 
   return (
+    <>
     <div className='box'>
       <h2 className='header'>
       React Drop
@@ -16,6 +18,9 @@ function App() {
         onFileChange={(files) => onFileChange(files)}
      />
     </div>
+     <GridImages/>
+    </>
+    
   )
 }
 

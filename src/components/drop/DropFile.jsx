@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import uploadImg from '../../assets/img/image.png'
 import './dropFile.css'
+import {upload} from '../../helpers/fetch'
 
 const DropFile = (props) => {
 
@@ -16,10 +17,16 @@ const DropFile = (props) => {
       const updateList = [...fileList, newFile]
       setFileList(updateList)
       props.onFileChange(updateList)
+      upload(newFile)
     }
+
   }
 
+
+  
+
   return (
+    <>
     <div 
     ref={wrapperRef}
     className='drop-file-content'
@@ -32,8 +39,12 @@ const DropFile = (props) => {
             <img className='img' src={uploadImg} alt='upload' />
             <p>Drag & Drop your image here</p>
         </div>
-        <input onChange={handleFileDrop} type='file' name='file' id='file' value=""/>
+        <form>
+        <input onChange={handleFileDrop} type='file' accept='image/*' multiple={false}/>
+        </form>
     </div>
+    </>
+    
   )
 }
 
