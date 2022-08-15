@@ -1,4 +1,7 @@
 .grid{
-    border: 1px solid #ccc;
-    margin: 5rem;
+    margin-top:200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
 }

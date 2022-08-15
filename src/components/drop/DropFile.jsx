@@ -1,12 +1,12 @@
 import React, {useRef, useState} from 'react'
 import uploadImg from '../../assets/img/image.png'
 import './dropFile.css'
-import {upload} from '../../helpers/fetch'
+
 
 const DropFile = (props) => {
 
   const [fileList, setFileList] = useState([])
-
+  
   const wrapperRef = useRef(null)
   const handleDragEnter = () => wrapperRef.current.classList.add('dragover')
   const handleDragLeave = () => wrapperRef.current.classList.remove('dragover')
@@ -15,9 +15,26 @@ const DropFile = (props) => {
     const newFile = e.target.files[0]
     if(newFile){
       const updateList = [...fileList, newFile]
-      setFileList(updateList)
       props.onFileChange(updateList)
-      upload(newFile)
+
+      const formData = new FormData()
+      formData.append('image', newFile)
+      
+      fetch('http://localhost:4000/api/image', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'multipart/form-data',
+        },
+        credentials: 'include'
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setFileList(updateList)
+      })
+      .catch(err => console.log(err))
+
     }
 
   }

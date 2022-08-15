@@ -1,13 +1,14 @@
-export function upload(url = 'http://localhost:4000/api/photos/', file) {
+export function upload(url = 'http://localhost:4000/api/image', file) {
     try{
-        const formData = new FormData()
+    const formData = new FormData()
     formData.append('image', file)
     return fetch(url, {
         method: 'POST',
         body: formData,
         headers: {
             'Accept': 'multipart/form-data',
-        }
+        },
+        credentials: 'include'
     })
     .then(res => res.json())
     .then(data => console.log(data))
